@@ -42,7 +42,7 @@ object IntQueueTest {
       val filter = x => BigInt(x).isProbablePrime(100)
     }
     for (i <- 1 to 100) q.put(i)
-    for (i <- 1 to 10) print(q.get + " ")
+    for (i <- 1 to 10) print(s"${q.get} ")
     println
   }
 
