@@ -1,0 +1,22 @@
+cat > MI.cpp << EOF
+#include <stdio.h>
+
+class B1 {
+    public: int getId() { return 1; }
+};
+class B2 {
+    public: int getId() { return 2; }
+};
+class C : public B1, public B2 {
+    // public: int getId() { return 3; }
+};
+
+int main(void) {
+    C* c = new C();
+    printf("%d\n", c -> getId());
+
+    return 0;
+}
+EOF
+g++ MI.cpp
+./a.out

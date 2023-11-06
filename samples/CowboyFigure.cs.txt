@@ -1,0 +1,46 @@
+cat > CowboyFigure.cs << EOF
+interface Figure {
+   void move(int dx, int dy);
+   void draw();
+}
+
+interface Cowboy {
+   void draw();
+   void shoot();
+}
+
+class CowboyFigure : Figure, Cowboy {
+
+   void Figure.move(int dx, int dy) {
+      System.Console.WriteLine("Figure:move({0}, {1})", dx, dy);
+   }
+   void Figure.draw() {
+      System.Console.WriteLine("Figure:draw");
+   }
+   void Cowboy.draw() {
+      System.Console.WriteLine("Cowboy:draw");
+   }
+   void Cowboy.shoot() {
+      System.Console.WriteLine("Cowboy:shoot");
+   }
+//   public void draw() {
+//      System.Console.WriteLine("CowboyFigure::draw");
+//      ((Figure)this).draw();
+//   }
+
+   public static void Main() {
+      CowboyFigure cbf = new CowboyFigure();
+      Cowboy c = (Cowboy) cbf;
+      Figure f = (Figure) cbf;
+      c.draw();
+      f.draw();
+//      cbf.draw();
+// CowboyFigure.csc(40,5): error CS1061: 'CowboyFigure' does not contain a
+//         definition for 'draw' and no extension method 'draw' accepting a first
+//         argument of type 'CowboyFigure' could be found (are you missing a using
+//         directive or an assembly reference?)
+   }
+}
+EOF
+mcs CowboyFigure.cs
+mono CowboyFigure.exe
